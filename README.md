@@ -1,16 +1,13 @@
 # MEMORY_MODULE
 
-This module implements a simple instruction memory component for use in a 5-stage pipelined RISC-V CPU, specifically targeting the Instruction Fetch (IF) stage.
-
 ## Overview
+This project implements a simple instruction memory module in VHDL, designed to serve the Instruction Fetch (IF) stage of a 5-stage pipelined RISC-V CPU. The INST_MEM module acts as a read-only memory (ROM) that outputs a 32-bit instruction based on a 32-bit byte address input. Address alignment is enforced on 4-byte boundaries.
 
-The `INST_MEM` module is a read-only memory (ROM) that holds 32-bit RISC-V instructions. It takes a 32-bit byte address input and outputs the corresponding instruction aligned on 4-byte boundaries.
-
-This repository includes:
-- VHDL implementation of the instruction memory
-- A testbench (`tb_INST_MEM.vhd` or `tb_inst_memory.vhd`) for verifying correctness
-- Example instruction set encoded in RISC-V hex format
-- Waveform and Tcl console output showing pass/fail status
+## Features
+- Read-only 32-bit instruction memory
+- Byte-addressable interface with 4-byte alignment
+- Indexed via address bits [9:2] (to support up to 256 instructions)
+- Clean, lightweight architecture for simulation and early development
 
 ## Project Structure
 MEMORY_MODULE/
@@ -28,20 +25,16 @@ MEMORY_MODULE/
 ├── .gitignore/
 ├── README.md/
 
-## Features
-- Byte-addressable interface
-- 4-byte alignment (address bits [9:2] used for indexing)
-- Simple architecture suitable for simulation and early-stage CPU development
-
 ## Testbench Strategy
-- The testbench (`tb_INST_MEM.vhd`) verifies instruction memory by comparing each fetched instruction to an expected list.
-- The testbench (`tb_inst_memory.vhd`) keep tracks total pass/fail counts and only prints mismatches with address, expected, and actual values
+Two testbenches are provided:
+- **tb_INST_MEM.vhd** — Compares each fetched instruction against a predefined instruction set.
+- **tb_inst_memory.vhd** — Tracks pass/fail counts and prints mismatch reports showing the address, expected, and actual instruction.
 
 ## Key Learnings
-- Realized that VHDL `function` behaves like **pass-by-value** in C  
-- Understood that VHDL `procedure` acts like **pass-by-reference**  
-- Learned to use **array attributes** to make generic, cleaner logic  
-- Continuously improving my testbench design for clearer output and better debugging
+- Understood that VHDL function behaves like pass-by-value (similar to C)
+- Learned that procedure in VHDL behaves like pass-by-reference
+- Applied array attributes ('range, 'length, etc.) for more general, reusable memory design
+- Continued refining testbench output readability and result tracking
 
 ## Simulation Results
 ### Tcl Console Output
@@ -55,35 +48,35 @@ MEMORY_MODULE/
 
 ## How to Run
 
-1. Launch **Vivado 2024.2**
+1. Launch **Vivado 2019** or newer
 2. Open the project or create a new one and add the src and a test bench file.
-3. Set the any of the test bench of your choice as the top simulation unit
-4. Go to **Flow → Run Simulation → Run Behavioral Simulation** or 
-    in the **project manager, you can directly click the run simulation -> Run Behavioral Simulation**.
-5. Open the **Waveform Viewer** to inspect signal transitions
-6. View the test results in the **Tcl Console**
+3. Set one of the testbench files as the top-level simulation unit.
+4. Run the simulation:
+    - Go to Flow → Run Simulation → Run Behavioral Simulation
+    - Or use the project manager's simulation shortcut.
+5. View signals in the Waveform Viewer and test status in the Tcl Console.
 
 ## Author
-
 **Noridel Herron** (@MIZZOU)  
 Senior in Computer Engineering  
 noridel.herron@gmail.com
 
-## Disclaimer
+## Contributing
+This is a personal academic project. Suggestions, issues, and improvements are welcome through GitHub.
 
+## License
+MIT License
+
+## Author
+**Noridel Herron** (@MIZZOU)  
+Senior in Computer Engineering  
+noridel.herron@gmail.com
+
+
+## Disclaimer
 This project is developed solely for educational and personal learning purposes.  
 It may contain unfinished or experimental features and is not intended for commercial or production use.
 
-## MIT License
-
-Copyright (c) 2025 Noridel Herron
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in
 all copies or substantial portions of the Software.
