@@ -11,19 +11,19 @@ This project implements a simple instruction memory module in VHDL, designed to 
 
 ## Project Structure
 MEMORY_MODULE/
-├── images/
-│   ├── tcl_tracktest.png
-│   ├── tcl1.png
-│   ├── tcl2.png
-│   ├── wave1.png
-│   ├── wave2.png
-├── src/
-│   ├── INST_MEM.vhd
-├── test_benches/
-│   ├── tb_INST_MEM.vhd
-│   ├── tb_inst_memory.vhd
-├── .gitignore/
-├── README.md/
+- images/
+    - tcl_tracktest.png
+    - tcl1.png
+    - tcl2.png
+    - wave1.png
+    - wave2.png
+- src/
+    - INST_MEM.vhd
+- test_benches/
+    - tb_INST_MEM.vhd
+    - tb_inst_memory.vhd
+- .gitignore/
+- README.md/
 
 ## Testbench Strategy
 Two testbenches are provided:
